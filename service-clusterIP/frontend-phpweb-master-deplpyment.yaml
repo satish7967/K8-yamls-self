@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: frontend
+    labels:
+        app: guestbook
+        tier: frontend
+spec:
+    template:
+        metadata:
+            name: redis-pod
+            labels:
+                app: guestbook
+                tier: frontend
+        spec:
+            containers:
+              - name: php-redis
+                image: gcr.io/google-samples/gb-frontend:v4
+                ports:
+                    - containerPort: 95
+    selector:
+        matchLabels:
+            app: guestbook
+            tier: frontend
+
+    replicas: 2

@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata: 
     name: nginx-rc
     labels:
-        app: nginx
+        app: nginx-app
         env: homo
         type: webserver
 spec:
@@ -11,13 +11,11 @@ spec:
         metadata:
             name: nginx-pod
             labels:
-                app: nginx
+                app: nginx-app
                 env: homo
                 type: webserver
         spec:
             containers:
               - name: nginx-container
                 image: nginx
-                ports:
-                    - containerPort: 7575
     replicas: 4
