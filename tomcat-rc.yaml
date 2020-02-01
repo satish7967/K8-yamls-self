@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+    name: tomcat-rc
+    labels:
+        app: tomcat
+        env: homo
+        type: webserber            
+spec:
+    template:
+        metadata:
+            name: tomcat-pod
+            labels:
+                app: tomcat
+                env: homo
+        spec:
+            containers:
+              - name: tomcat-container
+                image: tomcat
+                ports:
+                    - containerPort: 7474
+    replicas: 4

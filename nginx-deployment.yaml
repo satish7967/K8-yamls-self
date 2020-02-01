@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: nginx-deployment
+    labels:
+        app: nginx
+        env: homo
+        type: webserver
+spec:
+    template:
+        metadata:
+            name: nginx-pod
+            labels:
+                app: nginx
+                env: homo
+                type: webserver
+        spec:
+            containers:
+              - name: nginx-container
+                image: nginx:1.16
+                ports:
+                    - containerPort: 7575
+    selector:
+        matchLabels:
+            type: webserver
+
+    replicas: 3

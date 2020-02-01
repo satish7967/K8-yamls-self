@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+    name: ssd-monitor
+    labels:
+        app: ssd-monitor
+        env: test
+        type: monitoring
+spec:
+    template:
+        metadata:
+            name: ssd-pod
+            labels:
+                app: ssd-monitor
+                env: test
+                type: monitoring
+        spec:
+            nodeSelector:
+                disk: ssd
+            containers:
+              - name: ssd-container
+                image: luksa/ssd-monitor
+    selector:
+        matchLabels:
+            app: ssd-monitor
